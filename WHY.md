@@ -145,6 +145,10 @@ It is not the platform.
 
 ---
 
+The platform's primary product is trust.
+
+Reports are one output of trusted financial information.
+
 # Why Metadata Exists
 
 Community banks are all different.
