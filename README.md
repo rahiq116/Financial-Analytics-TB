@@ -1,5 +1,5 @@
 # Financial Analytics Platform (TexasBank Implementation)
-
+> Before contributing, read WHY.md.
 > **Current Status:** Active Development
 >
 > This repository contains the TexasBank implementation of the Financial Analytics Platform. It is the production implementation used to develop treasury analytics and reporting modules. A separate repository will contain the generic platform framework.
