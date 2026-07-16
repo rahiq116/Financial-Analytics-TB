@@ -1,6 +1,6 @@
 # CURRENT_STATE.md
 
-Version: 1.0
+Version: 1.3
 
 Last Updated: July 2026
 
@@ -8,102 +8,69 @@ Last Updated: July 2026
 
 # Current Milestone
 
-## Liquidity Dashboard MVP
+## Yield Statement UI Unification
 
 **Status**
 
-🟡 In Progress
+Complete
 
-**Business Deadline**
+**Business Objective**
 
-Monday
+Reduce treasury review friction by making the Yield Statement navigation, filters, report controls, and presentation consistent across Overview, Summary, Yield Statement, Budget, and Detail views.
 
-The current objective is to deliver a production-ready Liquidity Dashboard for treasury use.
+**Approved Scope**
 
-No major architectural refactoring should occur until this milestone is complete.
+- Presentation and navigation code under `powerpages/yield-statement`
+- Contextual control consolidation without capability loss
+- Responsive validation from 768px through native 4K
+- Accessibility improvements for tabs, focus states, and control labeling
+- Shared statement-table contract: Yield MTD is the presentation baseline, and every table-level visual change must apply in the same change to Yield MTD/QTD/YTD, Budget MTD/QTD/YTD, and Detail tables unless a content or width difference is required by the report
+
+**Deadline**
+
+No fixed deadline is recorded.
+
+**Out of Scope**
+
+- Financial calculations and treasury business behavior
+- Metadata, hierarchy, validation, mapping, import, and reconciliation behavior
+- Data loading, workbook structures, print contents, and export contents
+- Architectural refactoring or shared-engine extraction
 
 ---
 
 # Current Focus
 
-The current focus is NOT architecture.
-
-The current focus is delivering a working liquidity module.
-
-Primary objective:
-
-> Complete the Liquidity Dashboard while preserving the long-term platform architecture.
-
----
-
-# Immediate Priorities
-
-Priority 1
-
-Complete Liquidity Dashboard functionality.
-
-Priority 2
-
-Validate calculations.
-
-Priority 3
-
-Polish presentation.
-
-Priority 4
-
-Prepare production deployment.
-
----
-
-# Liquidity Dashboard Scope
-
-Current module responsibilities:
-
-- Ad hoc liquidity stress testing
-- Liquidity waterfall
-- Available liquidity calculation
-- Liquidity ratios
-- Growth assumptions
-- Budget assumption integration
-- Contractual runoff
-- Pro Forma Balance Sheet
-- Pro Forma Income Statement
-
-Current assumptions:
-
-- Operates at consolidated bank level.
-- Does NOT require organization hierarchy.
-- Uses existing budget assumptions for projected growth.
+Maintain the verified Yield Statement presentation baseline while preserving financial results and all existing treasury capabilities.
 
 ---
 
 # Current Architectural Constraints
 
-Do NOT:
+For this milestone:
 
-- Refactor the Yield Statement.
-- Extract shared modules.
-- Rewrite calculations.
-- Change Metadata architecture.
-- Modify Validation architecture.
-
-These tasks are intentionally deferred until after the liquidity milestone.
+- Preserve existing treasury calculations and business behavior.
+- Preserve metadata and validation behavior.
+- Do not introduce major architectural refactoring.
+- Prefer small, validated, incremental changes.
+- Document decisions that affect architecture or business rules.
+- Limit implementation to presentation, navigation, accessibility, and responsive layout behavior.
+- Compare representative report outputs before and after the UI changes.
+- Treat Yield MTD/QTD/YTD, Budget MTD/QTD/YTD, and Detail tables as one shared visual component; do not introduce report-only typography, spacing, row, header, section-bar, or scenario-header styling, and verify parity whenever the canonical Yield MTD table changes. Detail tables may retain wider minimum widths and horizontal scrolling when their column count requires it.
 
 ---
 
 # Current Known Technical Debt
 
-Accepted until after Monday:
+The following remains documented for future, incremental remediation:
 
-- Monolithic yield-dashboard.js
+- Monolithic Yield Statement implementation
 - Duplicate hierarchy logic
 - Duplicate rendering helpers
 - Duplicate utility functions
-- Liquidity hierarchy still independent
 - Shared Metadata Engine not yet extracted
 
-This technical debt is documented and intentionally deferred.
+No technical-debt work should begin without an approved milestone and a plan to preserve business behavior.
 
 ---
 
@@ -111,55 +78,31 @@ This technical debt is documented and intentionally deferred.
 
 Technical
 
-- Liquidity module deadline.
-- Refactoring before deployment.
-- Introducing regressions into production calculations.
+- Regressions in production financial calculations
+- Refactoring before business behavior is fully understood and validated
+- Divergent module-specific metadata or mappings
 
 Business
 
-- Treasury depends on Monday delivery.
-- Validation must remain trustworthy.
+- Reports being used without trustworthy validation results
+- Architecture decisions being made without a documented treasury workflow need
 
 Mitigation
 
-No architectural refactoring until deployment is complete.
+Documentation-first development, validation before reporting, finance-owned metadata, and incremental, verified change.
 
 ---
 
 # Immediate Success Criteria
 
-The Liquidity Dashboard is considered complete when it can:
+The Yield Statement UI milestone is complete when:
 
-✓ Load data.
-
-✓ Apply budget growth assumptions.
-
-✓ Produce liquidity projections.
-
-✓ Display liquidity ratios.
-
-✓ Display available liquidity.
-
-✓ Support ad hoc stress assumptions.
-
-✓ Produce production-ready reports.
-
----
-
-# Next Milestone
-
-Immediately after Liquidity deployment:
-
-## Metadata Engine Extraction
-
-Objectives:
-
-- Separate hierarchy from Yield Statement.
-- Create shared Metadata Engine.
-- Enable shared consumption across modules.
-- Preserve existing calculations.
-
-No business behavior should change.
+- Primary and contextual report navigation is clear, keyboard accessible, and free of overlap.
+- Filters remain in a stable order and contextual controls appear only where applicable.
+- Duplicate report controls are consolidated without capability loss.
+- Layouts are visually verified at 768px, 1024px, 1280px, 1440px, 2560x1440, and 3840x2160.
+- Representative KPIs, totals, yields, rates, and variances match the pre-change baseline.
+- Print, Excel export, Settings, displayed-line preferences, Detail row mode, and maximize/restore continue to work.
 
 ---
 
@@ -167,98 +110,45 @@ No business behavior should change.
 
 Near-Term
 
-- Validation Engine improvements.
-- Metadata Engine.
-- Shared utilities.
-- Shared calculations.
+- Validation Engine improvements
+- Shared Metadata Engine
+- Shared utilities
+- Shared calculations
 
 Medium-Term
 
-- Budget Planning.
-- FTP Engine.
-- Allocation Engine.
-- Journal Generator.
-- Plug Generator.
+- Budget Planning
+- FTP Engine
+- Allocation Engine
+- Journal Generator
+- Plug Generator
 
 Long-Term
 
-- Scenario Engine.
-- Executive Dashboard.
-- ALM.
-- Capital Planning.
-- Multi-tenant architecture.
+- Scenario Engine
+- Executive Dashboard
+- ALM
+- Capital Planning
+- Multi-tenant architecture
 
 ---
 
 # Active Development Principles
 
-Current development follows these priorities.
-
-1.
-
-Deliver business value.
-
-2.
-
-Preserve financial correctness.
-
-3.
-
-Avoid unnecessary refactoring.
-
-4.
-
-Document decisions.
-
-5.
-
-Prepare for modularization after current milestone.
+1. Deliver documented business value.
+2. Preserve financial correctness.
+3. Validation precedes reporting.
+4. Prefer configuration and metadata over hardcoding.
+5. Avoid unnecessary refactoring.
+6. Document decisions before implementation.
 
 ---
 
 # AI Guidance
 
-Current objective:
+Do not begin implementation until the active milestone and scope are documented.
 
-Finish the Liquidity Dashboard.
-
-Do not redesign the platform.
-
-Do not introduce large architectural changes.
-
-Do not optimize code unless required to complete the current milestone.
-
-Implementation should preserve all documented business rules.
-
----
-
-# Current AI Workflow
-
-ChatGPT
-
-- Product architecture
-- Treasury workflow
-- Prioritization
-- Strategic decisions
-
-OpenCode
-
-- Code generation
-- Feature implementation
-- Local development
-
-DeepSeek
-
-- Documentation
-- Repository analysis
-- Implementation review
-- Migration planning
-
-Repository Documentation
-
-- Canonical source of truth
-- Platform memory
-- Architecture guidance
+Implementation must preserve documented business rules, metadata, validation, and treasury behavior. If a proposed change conflicts with the architecture or its business consequences are uncertain, stop and explain the conflict before proceeding.
 
 ---
 
@@ -266,60 +156,46 @@ Repository Documentation
 
 Documentation
 
-🟢 Mature
+Mature
 
 Architecture
 
-🟢 Mature
+Mature
 
 Business Rules
 
-🟢 Mature
+Mature
 
 Product Vision
 
-🟢 Mature
+Mature
 
 Implementation
 
-🟡 Active Development
+Active Development
 
 Metadata Extraction
 
-⚪ Planned
+Planned
 
 Validation Engine
 
-⚪ Planned
+Planned
 
 Budget Planning
 
-⚪ Planned
+Planned
 
 FTP
 
-⚪ Planned
+Planned
 
 ALM
 
-⚪ Vision
+Vision
 
 ---
 
 # Reminder
 
-Current success is measured by:
-
-Shipping the Liquidity Dashboard.
-
-Not by architectural perfection.
-
-Architecture work resumes immediately after the Monday milestone.
-
-Until then:
-
-Deliver.
-
-Validate.
-
-Deploy.
+Current success is measured by delivering the next approved treasury workflow safely, with validated and explainable financial results.
